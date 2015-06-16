@@ -1,20 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    signingConfigs {
-        config {
-            keyAlias 'unisep'
-            keyPassword 'unisep'
-            storeFile file('C:/Users/Cleiton/chave.jks')
-            storePassword 'unisep'
-        }
-    }
-    compileSdkVersion 21
-    buildToolsVersion "23.0.0 rc2"
+    compileSdkVersion 22
+    buildToolsVersion "21.1.2"
+
     defaultConfig {
-        applicationId "br.edu.unisep.bellfoods"
+        applicationId "br.edu.unidep.bellfood"
         minSdkVersion 21
-        targetSdkVersion 21
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -22,19 +15,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
         }
-        debug {
-            signingConfig signingConfigs.config
-        }
-    }
-    productFlavors {
     }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile files('libs/gson-2.3.1.jar')
-    compile 'com.google.android.gms:play-services:7.5.0'
-    compile 'com.android.support:appcompat-v7:22.2.0'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }
