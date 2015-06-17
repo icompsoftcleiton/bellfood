@@ -5,12 +5,46 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
 
-    <com.google.android.maps.MapView
-        android:id="@+id/map_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:enabled="true"
-        android:clickable="true"
-        android:apiKey="SUA CHAVE DO GOOGLE MAPS" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:id="@+id/linearLayout">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal">
+
+            <EditText
+                android:layout_width="305dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtPesquisa" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/btnPesquisa" />
+
+        </LinearLayout>
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="223dp"
+            android:id="@+id/gridViewRecentes"
+            android:layout_gravity="center_horizontal"
+            android:numColumns="3" />
+
+        <GridView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/gridViewCurtidos"
+            android:layout_gravity="center_horizontal"
+            android:numColumns="3" />
+    </LinearLayout>
 
 </RelativeLayout>

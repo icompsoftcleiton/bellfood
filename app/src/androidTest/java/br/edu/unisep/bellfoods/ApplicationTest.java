@@ -1,4 +1,4 @@
-package br.edu.unidep.bellfood;
+package br.edu.unisep.bellfoods;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
