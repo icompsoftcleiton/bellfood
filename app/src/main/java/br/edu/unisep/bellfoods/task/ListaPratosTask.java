@@ -18,7 +18,7 @@ public class ListaPratosTask extends AsyncTask<Void, List<PratoVO>, Void> {
     private MainActivity activity;
 
 
-    public ListaPratosTask(MainActivity activity) {
+    public ListaPratosTask(MainActivity activity, String query) {
 
 //        try {
 //            String ws = "http://192.168.2.101:80/bellfoods/index.php";

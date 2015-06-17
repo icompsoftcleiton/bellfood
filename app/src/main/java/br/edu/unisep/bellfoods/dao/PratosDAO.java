@@ -5,7 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import br.edu.unisep.bellfoods.helper.PratosHelper;
+import br.edu.unisep.bellfoods.vo.EstabelecimentoVO;
 import br.edu.unisep.bellfoods.vo.PratoVO;
 
 /**
@@ -45,12 +49,27 @@ public class PratosDAO {
         db.close();
     }
 
-    public Cursor listar() {
+    public List<PratoVO> listar() {
 
         SQLiteDatabase db = helper.getReadableDatabase();
         String[] colunas = {"_id", "curtidas", "nome", "descricao", "estabelecimento", "foto", "latitude", "longitude"};
         Cursor cursor = db.query("pratos", colunas, null, null, null, null, "curtidas");
-        return cursor;
+        List<PratoVO> lista = new ArrayList<PratoVO>();
+        while (cursor.moveToNext()) {
+            PratoVO prato = new PratoVO();
+            prato.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+            prato.setCurtidas(cursor.getInt(cursor.getColumnIndex("curtidas")));
+            prato.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+            prato.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
+            EstabelecimentoVO estabelecimento = new EstabelecimentoVO();
+            estabelecimento.setId(cursor.getInt(cursor.getColumnIndex("estabelecimento")));
+            estabelecimento.setLatitude(cursor.getString(cursor.getColumnIndex("latitude")));
+            estabelecimento.setLongitude(cursor.getString(cursor.getColumnIndex("longitude")));
+            prato.setEstabelecimento(estabelecimento);
+            prato.setFoto(cursor.getString(cursor.getColumnIndex("foto")));
+            lista.add(prato);
+        }
+        return lista;
 
     }
 

@@ -1,12 +1,14 @@
 package br.edu.unisep.bellfoods;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +26,8 @@ public class MainActivity extends Activity {
     private ListaPratosTask task;
 
     private List<PratoVO> listaPratoCurtidos;
+
+    private List<PratoVO> listaPratoRecentes;
 
     private GridView gridRecentes;
 
@@ -47,7 +51,7 @@ public class MainActivity extends Activity {
 
         this.gridCurtidos = (GridView) findViewById(R.id.gridViewCurtidos);
         this.listaPratoCurtidos = new ArrayList<PratoVO>();
-        this.task = new ListaPratosTask(this);
+        this.task = new ListaPratosTask(this, "");
         this.task.execute();
         this.adapterCurtidos = new ListaPratosCurtidosAdapter(this, 0, this.listaPratoCurtidos);
         this.gridCurtidos.setAdapter(this.adapterCurtidos);
@@ -88,14 +92,30 @@ public class MainActivity extends Activity {
 
         this.gridRecentes = (GridView) findViewById(R.id.gridViewRecentes);
         this.dao = new PratosDAO(this);
-        this.cursor = dao.listar();
-        this.adapterRecentes = new ListaPratosRecentesAdapter(this, cursor, 0);
-//        this.gridRecentes.setAdapter(this.adapterRecentes);
+        this.listaPratoRecentes = dao.listar();
+        this.adapterRecentes = new ListaPratosRecentesAdapter(this, 0, this.listaPratoRecentes);
+        this.gridRecentes.setAdapter(this.adapterRecentes);
+        this.gridRecentes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                cursor = dao.consultar(id + 1);
+                cursor.move(1);
+                // adiciona ou atualiza o registro nos recentes
+                PratoVO prato = new PratoVO();
+                prato.setId(cursor.getInt(cursor.getColumnIndex("_id")));
+                prato.setCurtidas(cursor.getInt(cursor.getColumnIndex("curtidas")));
+                prato.setFoto(cursor.getString(cursor.getColumnIndex("foto")));
+                prato.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+                EstabelecimentoVO estabelecimento = new EstabelecimentoVO();
+                estabelecimento.setLatitude(cursor.getString(cursor.getColumnIndex("latitude")));
+                estabelecimento.setLongitude(cursor.getString(cursor.getColumnIndex("longitude")));
+                prato.setEstabelecimento(estabelecimento);
+                dao.alterar(prato);
 
-        this.gridRecentes.setVisibility(View.VISIBLE);
-        if (this.cursor.getCount() == 0) {
-            this.gridRecentes.setVisibility(View.INVISIBLE);
-        }
+                Intent intent = new Intent(activity, DetalhesActivity.class);
+                intent.putExtra("prato", prato);
+                startActivity(intent);
+            }
+        });
     }
 
     public void atualizarLista(List<PratoVO> lista) {
@@ -105,7 +125,16 @@ public class MainActivity extends Activity {
     }
 
     public void pesquisar(View v) {
-
+        TextView txtPesquisa = (TextView) findViewById(R.id.txtPesquisa);
+        String pesquisa = txtPesquisa.getText().toString();
+        if (pesquisa.equals("")) {
+            AlertDialog msg = new AlertDialog.Builder(this).create();
+            msg.setTitle("Erro");
+            msg.setMessage("Digite algo para pesquisar!");
+            msg.show();
+        }
+        this.task = new ListaPratosTask(this, pesquisa);
+        this.task.execute();
     }
 
 }
