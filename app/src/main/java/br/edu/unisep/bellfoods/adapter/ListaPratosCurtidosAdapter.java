@@ -36,6 +36,8 @@ public class ListaPratosCurtidosAdapter extends ArrayAdapter<PratoVO> {
 
             ImageView foto = new ImageView(context);
             foto.setImageBitmap(decodedByte);
+
+
             return foto;
         } catch (Exception e) {
             e.printStackTrace();

@@ -18,17 +18,21 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:layout_gravity="center_horizontal">
+            android:layout_gravity="center_horizontal"
+            android:weightSum="1">
 
             <EditText
-                android:layout_width="305dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/edtPesquisa" />
+                android:id="@+id/edtPesquisa"
+                android:layout_weight="0.82" />
 
             <Button
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/btnPesquisa" />
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:id="@+id/btnPesquisa"
+                android:background="@drawable/search_magnifying_glass_find"
+                android:onClick="pesquisar" />
 
         </LinearLayout>
 

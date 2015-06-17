@@ -103,4 +103,9 @@ public class MainActivity extends Activity {
         this.listaPratoCurtidos.addAll(lista);
         this.adapterCurtidos.notifyDataSetChanged();
     }
+
+    public void pesquisar(View v) {
+
+    }
+
 }
