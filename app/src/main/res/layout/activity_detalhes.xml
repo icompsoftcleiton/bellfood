@@ -22,7 +22,8 @@
         android:width="16dp"
         android:background="@drawable/like"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="curtir" />
 
     <Button
         android:layout_width="wrap_content"
@@ -30,7 +31,8 @@
         android:id="@+id/btnDescurtir"
         android:background="@drawable/dislike"
         android:layout_alignTop="@+id/btnCurtir"
-        android:layout_toEndOf="@+id/btnCurtir" />
+        android:layout_toEndOf="@+id/btnCurtir"
+        android:onClick="descurtir" />
 
     <ImageView
         android:layout_width="match_parent"

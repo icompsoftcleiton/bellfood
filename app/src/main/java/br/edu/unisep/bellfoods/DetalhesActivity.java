@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import br.edu.unisep.bellfoods.task.ListaPratosTask;
+import br.edu.unisep.bellfoods.task.QualificarPratoTask;
 import br.edu.unisep.bellfoods.vo.PratoVO;
 
 
@@ -59,4 +61,15 @@ public class DetalhesActivity extends Activity {
         intent.putExtra("prato", prato);
         startActivity(intent);
     }
+
+    public void curtir(View v) {
+        QualificarPratoTask task = new QualificarPratoTask("curtir", prato.getId());
+        task.execute();
+    }
+
+    public void descurtir(View v)  {
+        QualificarPratoTask task = new QualificarPratoTask("descurtir", prato.getId());
+        task.execute();
+    }
+
 }

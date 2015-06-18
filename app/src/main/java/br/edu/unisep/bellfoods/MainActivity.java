@@ -66,7 +66,9 @@ public class MainActivity extends Activity {
                     prato.setCurtidas(cursor.getInt(cursor.getColumnIndex("curtidas")));
                     prato.setFoto(cursor.getString(cursor.getColumnIndex("foto")));
                     prato.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+                    prato.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
                     EstabelecimentoVO estabelecimento = new EstabelecimentoVO();
+                    estabelecimento.setNome(cursor.getString(cursor.getColumnIndex("nome")));
                     estabelecimento.setLatitude(cursor.getString(cursor.getColumnIndex("latitude")));
                     estabelecimento.setLongitude(cursor.getString(cursor.getColumnIndex("longitude")));
                     prato.setEstabelecimento(estabelecimento);
@@ -79,6 +81,7 @@ public class MainActivity extends Activity {
                     prato.setEstabelecimento(listaPratoCurtidos.get(position).getEstabelecimento());
                     prato.setFoto(listaPratoCurtidos.get(position).getFoto());
                     EstabelecimentoVO estabelecimento = new EstabelecimentoVO();
+                    estabelecimento.setNome(listaPratoCurtidos.get(position).getEstabelecimento().getNome());
                     estabelecimento.setLatitude(listaPratoCurtidos.get(position).getEstabelecimento().getLatitude());
                     estabelecimento.setLongitude(listaPratoCurtidos.get(position).getEstabelecimento().getLongitude());
                     prato.setEstabelecimento(estabelecimento);
@@ -105,7 +108,9 @@ public class MainActivity extends Activity {
                 prato.setCurtidas(cursor.getInt(cursor.getColumnIndex("curtidas")));
                 prato.setFoto(cursor.getString(cursor.getColumnIndex("foto")));
                 prato.setNome(cursor.getString(cursor.getColumnIndex("nome")));
+                prato.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
                 EstabelecimentoVO estabelecimento = new EstabelecimentoVO();
+                estabelecimento.setNome(cursor.getString(cursor.getColumnIndex("nome")));
                 estabelecimento.setLatitude(cursor.getString(cursor.getColumnIndex("latitude")));
                 estabelecimento.setLongitude(cursor.getString(cursor.getColumnIndex("longitude")));
                 prato.setEstabelecimento(estabelecimento);

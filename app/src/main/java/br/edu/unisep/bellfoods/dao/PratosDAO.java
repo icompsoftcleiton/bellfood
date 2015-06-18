@@ -63,6 +63,7 @@ public class PratosDAO {
             prato.setDescricao(cursor.getString(cursor.getColumnIndex("descricao")));
             EstabelecimentoVO estabelecimento = new EstabelecimentoVO();
             estabelecimento.setId(cursor.getInt(cursor.getColumnIndex("estabelecimento")));
+            estabelecimento.setNome(cursor.getString(cursor.getColumnIndex("nome")));
             estabelecimento.setLatitude(cursor.getString(cursor.getColumnIndex("latitude")));
             estabelecimento.setLongitude(cursor.getString(cursor.getColumnIndex("longitude")));
             prato.setEstabelecimento(estabelecimento);
